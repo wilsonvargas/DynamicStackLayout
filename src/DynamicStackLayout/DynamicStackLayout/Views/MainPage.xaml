@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DynamicStackLayout"
+             xmlns:controls="clr-namespace:DynamicStackLayout.Controls"
+             x:Class="DynamicStackLayout.Views.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="DarkGray" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout
+        Orientation="Vertical"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+        <!--Header-->
+        <StackLayout
+            Orientation="Vertical"
+            Spacing="10">
+            <!--Title-->
+            <Label
+                Text="Header"
+                TextColor="Black"
+                HorizontalTextAlignment="Center"
+                FontAttributes="Bold"
+                FontSize="Large" />
+            <!--Separator-->
+            <BoxView
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand"
+                HeightRequest="2"
+                Color="Black" />
+        </StackLayout>
+        <!--Content-->
+        <ScrollView VerticalOptions="FillAndExpand">
+            <controls:DynamicStackLayout
+                ItemsSource="{Binding Items}"
+                HorizontalOptions="FillAndExpand"
+                Spacing="5">
+                <controls:DynamicStackLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="LightGray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Aspect="AspectFill">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding Image}" />
+                                </Image.Source>
+                            </Image>
+                            <Label Grid.Column="1" Text="{Binding Name}" FontSize="Medium" VerticalTextAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </controls:DynamicStackLayout.ItemTemplate>
+            </controls:DynamicStackLayout>
+        </ScrollView>
+        <!--Footer-->
+        <StackLayout
+            Orientation="Horizontal"
+            VerticalOptions="End"
+            HorizontalOptions="CenterAndExpand">
+            <Image
+                Source="icon.png"
+                Aspect="AspectFit" />
+            <Label
+                Text="Footer"
+                Style="{StaticResource LabelStyle}"
+                FontSize="Large" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
