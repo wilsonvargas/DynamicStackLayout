@@ -17,6 +17,7 @@
     <StackLayout
         Orientation="Vertical"
         VerticalOptions="FillAndExpand"
+        Margin="0,20"
         HorizontalOptions="FillAndExpand">
         <!--Header-->
         <StackLayout
